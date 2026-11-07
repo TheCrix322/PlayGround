@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#101121" />
+  <title>Starfall Keep — Anime Tower Defense</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Starfall Keep home"><span class="brand-mark">✦</span><span>STARFALL <b>KEEP</b></span></a>
+      <div class="season-tag"><span class="season-dot"></span> CHAPTER 01 <i>·</i> THE MOONLIT FRONTIER</div>
+      <div class="player-chip"><div class="player-avatar">✧</div><div><strong>Wanderer</strong><small>RANK 08 <span>✦</span></small></div><div class="player-chevron">⌄</div></div>
+    </header>
+    <main class="game-layout">
+      <section class="battle-column">
+        <div class="battle-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> STORY CAMPAIGN <span class="chapter">01 / 06</span></div><h1>Moonlit <em>Pass</em></h1><p class="subtitle">The first rift has opened. Hold the pass until dawn.</p></div><button class="icon-btn map-btn" title="Map information">⌖</button></div>
+        <div class="stage-wrap">
+          <div class="stage-topline"><div class="stage-location"><span class="location-icon">⌖</span><span>FROSTFALL RIDGE</span><span class="stage-divider">/</span><span>STAGE 1-3</span></div><div class="stage-weather"><span>☾</span> MOONLIT <span class="weather-divider">·</span> <span class="weather-temp">−4°</span></div></div>
+          <div class="game-viewport" id="gameViewport"><canvas id="gameCanvas" aria-label="3D tower defense battlefield"></canvas><div class="canvas-vignette"></div><div class="battle-toast" id="battleToast"></div>
+            <div class="wave-banner hide" id="waveBanner"><div class="wave-symbol">✦</div><div><small>INCOMING</small><strong>WAVE <span id="bannerWave">01</span></strong></div><span class="banner-rule"></span><span class="enemy-count"><b id="bannerCount">8</b> enemies</span></div>
+            <div class="wave-progress"><span id="waveProgress"></span></div>
+            <div class="stage-controls"><button class="mini-control" id="cameraButton" title="Change camera">⤢</button><button class="mini-control" id="speedButton" title="Toggle speed">×1</button></div>
+            <div class="placement-hint" id="placementHint">SELECT A HERO, THEN PLACE THEM ON A GLOWING TILE</div>
+            <div class="ability-float"><button class="ultimate-btn" id="ultimateBtn" aria-label="Cast ultimate ability"><span>✧</span><small>ULTIMATE</small><b id="ultimateKey">Q</b></button></div>
+          </div>
+          <div class="battle-footer"><div class="wave-state"><span class="state-orb" id="stateOrb"></span><span id="phaseText">PREPARE YOUR DEFENSES</span></div><div class="wave-readout"><span>WAVE</span><strong id="waveNumber">01</strong><span class="readout-divider">/</span><span id="waveTotal">05</span></div><button class="start-wave" id="startWave"><span>BEGIN WAVE</span><b>→</b></button></div>
+        </div>
+        <div class="roster-panel"><div class="section-heading"><div><div class="eyebrow">YOUR FORMATION</div><h2>Battle Deck <span class="deck-count">3 / 5</span></h2></div><button class="text-action" id="editDeck">EDIT DECK <span>↗</span></button></div><div class="hero-cards" id="heroCards"></div></div>
+      </section>
+      <aside class="side-column">
+        <section class="resource-panel"><div class="resource-item"><div class="resource-icon gold-icon">◈</div><div><small>STARSHARDS</small><strong id="goldValue">240</strong></div><button class="plus-btn" title="Starshards earned from waves">+</button></div><div class="resource-item"><div class="resource-icon heart-icon">♥</div><div><small>KEEP VITALITY</small><strong><span id="livesValue">20</span><i> / 20</i></strong></div><div class="vitality-bar"><span id="vitalityFill"></span></div></div></section>
+        <section class="mission-panel"><div class="panel-kicker"><span class="pulse-dot"></span> ACTIVE MISSION <span class="mission-id">#001</span></div><h3>Hold the<br><em>Moonlit Pass</em></h3><div class="mission-progress"><div><span>THREAT LEVEL</span><b id="threatLevel">LOW</b></div><div class="threat-track"><i id="threatFill"></i></div></div><div class="mission-metrics"><div><small>ELAPSED</small><strong id="timerValue">00:00</strong></div><div><small>ENEMIES DOWN</small><strong id="killsValue">00</strong></div><div><small>BEST STREAK</small><strong id="streakValue">×0</strong></div></div><div class="mission-objective"><span class="objective-check" id="objectiveCheck">✓</span><span>Keep at least <b>10 vitality</b><br>through all 5 waves</span></div></section>
+        <section class="intel-panel"><div class="intel-heading"><div><div class="eyebrow">FIELD INTEL</div><h3>Enemy <em>codex</em></h3></div><button class="more-btn" id="codexButton" title="View codex">•••</button></div><div class="enemy-list"><div class="enemy-entry"><div class="enemy-portrait slime">◉</div><div><b>Voidling</b><small>SWIFT · RIFTBORN</small></div><span class="enemy-threat low-threat">LOW</span></div><div class="enemy-entry"><div class="enemy-portrait brute">◆</div><div><b>Ironhide</b><small>ARMORED · HEAVY</small></div><span class="enemy-threat med-threat">MID</span></div><div class="enemy-entry"><div class="enemy-portrait boss">♜</div><div><b>Rift Warden</b><small>ELITE · BOSS</small></div><span class="enemy-threat high-threat">HIGH</span></div></div><div class="intel-tip"><span>✦</span><p><b>TACTICAL TIP</b><br>Place heroes near the bends for maximum range coverage.</p></div></section>
+        <div class="side-quote"><span>✧</span><p>“Even the longest night<br>ends with a single star.”</p><small>— LYRA, STARKEEPER</small></div>
+      </aside>
+    </main>
+    <footer class="bottom-bar"><div class="bottom-world"><span>✦</span> THE ASTRAL FRONTIER</div><div class="footer-links"><button id="storyButton">STORY</button><i></i><button id="skinsButton">SKINS</button><i></i><button id="soundButton">SOUND <span id="soundState">ON</span></button></div><div class="build-version">v1.0.4 <span>·</span> MADE UNDER THE STARS</div></footer>
+  </div>
+  <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true"><div class="modal-card" role="dialog" aria-modal="true"><button class="modal-close" id="modalClose">×</button><div class="eyebrow" id="modalEyebrow">STARFALL KEEP</div><h2 id="modalTitle">Battle Deck</h2><div id="modalContent"></div><button class="modal-done" id="modalDone">GOT IT <span>→</span></button></div></div>
+  <div class="toast" id="uiToast"></div>
+  <script type="module" src="game.js"></script>
+</body>
+</html>
