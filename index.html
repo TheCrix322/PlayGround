@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#10131e" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%231a1b2a'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-size='44' fill='%23e9bd73'%3E✦%3C/text%3E%3C/svg%3E" />
+  <title>Starfall Tactics — Rift Defense</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="game-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Starfall Tactics home"><span class="brand-mark">✦</span><span>STARFALL <b>TACTICS</b></span></a>
+      <div class="chapter"><span class="chapter-kicker">CAMPAIGN · CHAPTER 01</span><strong>THE SHATTERED GATE</strong></div>
+      <div class="top-actions"><button class="icon-btn" id="soundBtn" title="Toggle sound">♫</button><button class="icon-btn" id="helpBtn" title="How to play">?</button><div class="profile"><div class="profile-avatar">✧</div><div><b>Wayfinder</b><small>LV. 08</small></div><span class="chevron">⌄</span></div></div>
+    </header>
+
+    <section class="game-layout">
+      <aside class="sidebar">
+        <div class="mission-head"><div class="eyebrow"><span class="live-dot"></span> ACTIVE MISSION</div><h1>Moonlit<br><em>Crossing</em></h1><p>Hold the astral pass. Don't let the riftborn reach the gate.</p></div>
+        <div class="mission-stats"><div><span>THREAT</span><b class="threat">✦✦<i>✦✦</i></b></div><div><span>BEST CLEAR</span><b>WAVE 12</b></div></div>
+        <div class="divider"></div>
+        <div class="section-title"><div><span class="eyebrow">YOUR SQUAD</span><h2>Battle deck <small>3 / 5</small></h2></div><button class="text-btn" id="deckBtn">EDIT ↗</button></div>
+        <div class="deck-list" id="deckList"></div>
+        <div class="field-tip"><span class="tip-icon">⌖</span><div><b>Deploy a guardian</b><small>Choose a hero, then tap a glowing spot on the field.</small></div></div>
+        <div class="sidebar-bottom"><span class="online-dot"></span> RIFT DEFENSE ACTIVE <span class="settings">⚙</span></div>
+      </aside>
+
+      <section class="battle-area">
+        <div class="battle-topline"><div class="map-label"><span class="map-pin">⌖</span><div><b>MOONLIT CROSSING</b><small>ASTERIA · FRONTIER 01</small></div></div><div class="weather"><span>☾</span> MOON PHASE <b>WANING</b></div></div>
+        <div class="field-wrap" id="fieldWrap">
+          <canvas id="battlefield" aria-label="Tower defense battlefield"></canvas>
+          <div class="field-vignette"></div>
+          <div class="field-hud">
+            <div class="hud-pill lives"><span class="heart">♥</span><b id="lives">20</b><small>GATE HP</small></div>
+            <div class="hud-pill wave"><span class="wave-symbol">◈</span><div><b>WAVE <i id="waveNum">01</i><small id="waveState">PREPARE</small></b><div class="wave-progress"><span id="waveProgress"></span></div></div></div>
+            <div class="hud-pill coins"><span>✦</span><b id="coins">300</b><small>STARDUST</small></div>
+          </div>
+          <div class="field-legend"><span><i class="legend-path"></i> RIFT TRAIL</span><span><i class="legend-range"></i> HERO RANGE</span></div>
+          <div class="toast" id="toast"></div>
+        </div>
+        <div class="battle-controls">
+          <div class="wave-info"><div class="wave-emblem">◈</div><div><b id="waveTitle">The rift stirs</b><small id="waveSubtitle">Deploy your guardians before the first breach.</small></div></div>
+          <div class="control-buttons"><button class="ability-btn" id="abilityBtn"><span>✧</span><div><b>STARFALL</b><small id="abilityStatus">READY · 1 CHARGE</small></div><kbd>Q</kbd></button><button class="speed-btn" id="speedBtn">▶ <b>1×</b></button><button class="launch-btn" id="launchBtn"><span>START WAVE</span><b>01 <i>→</i></b></button></div>
+        </div>
+      </section>
+
+      <aside class="right-rail">
+        <div class="rail-heading"><div><span class="eyebrow">FIELD INTEL</span><h2>Encounter</h2></div><span class="intel-icon">⌁</span></div>
+        <div class="enemy-card"><div class="enemy-art"><span class="enemy-orbit">◌</span><span class="enemy-face">◈</span></div><div class="enemy-desc"><span class="enemy-tag">WAVE 01 · INCOMING</span><b>Gloomling</b><small>Swift · Riftborn</small></div><div class="enemy-count"><b id="enemyCount">0</b><small>LEFT</small></div></div>
+        <div class="enemy-card boss-card"><div class="boss-art"><span>♜</span></div><div class="enemy-desc"><span class="boss-tag">CHAPTER BOSS</span><b>The Hollow King</b><small>Armored · Cataclysm</small></div><span class="lock-icon">♙</span></div>
+        <div class="intel-divider"></div>
+        <div class="rail-heading objectives-heading"><div><span class="eyebrow">MISSION ORDERS</span><h2>Objectives</h2></div><span class="objective-count">0 / 2</span></div>
+        <div class="objective"><span class="check-box" id="objOne">✓</span><div><b>Survive the breach</b><small>Clear wave 1</small></div></div>
+        <div class="objective"><span class="check-box" id="objTwo">✓</span><div><b>Protect the gate</b><small>Keep at least 10 HP</small></div></div>
+        <div class="relic-card"><span class="relic-spark">✦</span><div><span class="eyebrow">RELIC BONUS</span><b>Moonstone blessing</b><small>+25% ability charge this stage</small></div></div>
+        <button class="map-button" id="mapBtn"><span>▧</span> CAMPAIGN MAP <i>↗</i></button>
+      </aside>
+    </section>
+    <footer class="footer"><span>✦ &nbsp; ASTRAL FRONTIER</span><span>BUILD 0.9.4 <i>·</i> THE CONSTELLATION AWAKENS</span><span>© STARFALL ARCHIVE</span></footer>
+  </main>
+
+  <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true"><section class="modal" id="modal"><button class="modal-close" id="modalClose">×</button><div id="modalContent"></div></section></div>
+  <script src="game.js"></script>
+</body>
+</html>
